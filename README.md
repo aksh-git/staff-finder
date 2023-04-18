@@ -1,3 +1,3 @@
 # staff-finder
 
-colorss : https://www.color-hex.com/palettes/1294.png
+colors : https://www.color-hex.com/palettes/1294.png
