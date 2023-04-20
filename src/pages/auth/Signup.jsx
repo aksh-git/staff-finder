@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useNavigate, redirect } from 'react-router-dom';
 import Loder from '../../components/Loder';
 import config from '../../../config';
 
 function Signup() {
-  
-  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT;
 
+  const navigate = useNavigate();
+
+  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT;
+  const token = localStorage.getItem(config.token_var) 
+  useEffect(() => {
+    if(token){
+      return navigate('/')
+    }
+  }, [token])
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
   const [firstname, setfirstname] = useState('')
@@ -14,7 +21,7 @@ function Signup() {
 
   const [error, setError] = useState({error:"",eerror:"hidden"});
   const [loderVisible, setLoderVisible] = useState("none");
-  const navigate = useNavigate();
+  
 
   const handleEmailChange = (e)=>{
     var val = e.target.value.trim()
@@ -58,6 +65,7 @@ function Signup() {
     let data = await response.json();
     setLoderVisible("none");
     if(data.success){
+      localStorage.setItem(config.token_var, data.authtoken);
       return navigate("/");
     }else{
       setError({eerror:'',error:data.error})
@@ -160,7 +168,7 @@ function Signup() {
                  className="w-6 h-6 -ml-2"
                  fill="none"
                  stroke="currentColor"
-                 stroke-width="2"
+                 strokeWidth="2"
                  stroke-linecap="round"
                  stroke-linejoin="round"
                >
@@ -189,8 +197,7 @@ function Signup() {
        ></div>
      </div>
    </div>
-   
-   </div>
+  </div>
   )
 }
 

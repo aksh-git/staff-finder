@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loder from '../../components/Loder';
 import config from '../../../config';
 
 function Login() {
-
+  const navigate = useNavigate();
   const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT;
-
+  const token = localStorage.getItem(config.token_var) 
+  
+  useEffect(() => {
+    if(token){
+      return navigate('/')
+    }
+  }, [token])
+  
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
   const [error, setError] = useState({error:"",eerror:"hidden"});
   const [loderVisible, setLoderVisible] = useState("none");
-  const navigate = useNavigate();
+  
   const handleEmailChange = (e)=>{
     var val = e.target.value.trim()
     setemail(val)
@@ -40,6 +47,7 @@ function Login() {
     let data = await response.json();
     setLoderVisible("none");
     if(data.success){
+      localStorage.setItem(config.token_var, data.authtoken);
       return navigate("/");
     }else{
       setError({eerror:'',error:data.error})
