@@ -1,11 +1,59 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Loder from '../../components/Loder';
+import config from '../../../config';
 
 function Login() {
+
+  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT;
+
+  const [email, setemail] = useState('')
+  const [password, setpassword] = useState('')
+  const [error, setError] = useState({error:"",eerror:"hidden"});
+  const [loderVisible, setLoderVisible] = useState("none");
+  const navigate = useNavigate();
+  const handleEmailChange = (e)=>{
+    var val = e.target.value.trim()
+    setemail(val)
+  }
+  const handlePasswordChange = (e) =>{
+    var val = e.target.value.trim()
+    setpassword(val)
+  }
+
+  async function handleLoginFormSubmit(e){
+    setLoderVisible("block");
+    e.preventDefault();
+    
+    let response = await fetch(`${base_url}/api/auth/login`, { 
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      }),
+    });
+    
+    let data = await response.json();
+    setLoderVisible("none");
+    if(data.success){
+      return navigate("/");
+    }else{
+      setError({eerror:'',error:data.error})
+    }
+  }
+
+
   return (
     <div className='login-page bg-bodyBg'>
+      
      <div
       className="max-w-screen bg-bodyBg shadow flex justify-center flex-1 login-page-wrapper">
       <div className="lg:w-1/2 p-6 sm:p-12">
+        
         <div>
           {/* LOGO <img
             src=""
@@ -45,26 +93,36 @@ function Login() {
                 </span>
               </button>
             </div>
-
-            <div className="my-12 border-b text-center">
+            <Loder visible={loderVisible} />
+            <div className="my-4 border-b text-center">
               <div
                 className="leading-none px-2 inline-block text-sm text-accent tracking-wide font-medium bg-bodyBg transform translate-y-1/2"
               >
                 Or Login with e-mail
               </div>
             </div>
-
-            <div className="mx-auto max-w-xs">
+            
+            
+            <div className="mx-auto max-w-xs py-4">
+            <div className={`mb-5 py-2 w-full rounded-sm text-center text-sm bg-red-800 text-white font-semibold ${error.eerror}`}>{error.error}</div>
+              <form onSubmit={(e)=>handleLoginFormSubmit(e)}>
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100 "
                 type="email"
                 placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+                required
               />
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100  mt-5"
                 type="password"
                 placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
               />
+              
               <button
                 className="mt-5 tracking-wide font-semibold bg-primary text-gray-100 w-full py-4 rounded-lg hover:bg-accent transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
               >
@@ -75,11 +133,13 @@ function Login() {
               </button>
               <p className="mt-6 text-sm text-gray-600 text-center">
                 Not a member?
-                <a href="/sign-up" className="border-b border-gray-500 border-dotted text-accent"> Join Staff-finder</a>
+                <a href="/signup" className="border-b border-gray-500 border-dotted text-accent"> Join Staff-finder</a>
               </p>
+              </form>
             </div>
           </div>
         </div>
+        
       </div>
       <div className="flex-1 bg-accent text-center hidden lg:flex">
         <div

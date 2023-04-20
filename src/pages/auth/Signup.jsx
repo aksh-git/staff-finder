@@ -1,6 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import Loder from '../../components/Loder';
+import config from '../../../config';
 
 function Signup() {
+  
+  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT;
+
+  const [email, setemail] = useState('')
+  const [password, setpassword] = useState('')
+  const [firstname, setfirstname] = useState('')
+  const [lastName, setlastName] = useState('')
+
+  const [error, setError] = useState({error:"",eerror:"hidden"});
+  const [loderVisible, setLoderVisible] = useState("none");
+  const navigate = useNavigate();
+
+  const handleEmailChange = (e)=>{
+    var val = e.target.value.trim()
+    setemail(val)
+    if(error.eerror!='hidden'){
+      setError({eerror:"hidden"})
+    }
+  }
+  const handleFirstnameChange = (e)=>{
+    var val = e.target.value;
+    var fname = val.replace(/[^a-zA-Z]/g, '');
+    setfirstname(fname)
+  }
+  const handlelastNameChange = (e)=>{
+    var val = e.target.value;
+    var lname = val.replace(/[^a-zA-Z]/g, '');
+    setlastName(lname)
+  }
+  const handlePasswordChange = (e) =>{
+    var val = e.target.value.trim()
+    setpassword(val)
+  }
+
+  async function signup(e){
+    setLoderVisible("block");
+    e.preventDefault();
+    
+    let response = await fetch(`${base_url}/api/auth/signup`, { 
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstname: firstname,
+        lastname: lastName,
+        email: email,
+        password: password
+      }),
+    });
+
+    let data = await response.json();
+    setLoderVisible("none");
+    if(data.success){
+      return navigate("/");
+    }else{
+      setError({eerror:'',error:data.error})
+    }
+
+  }
   return (
     <div className='signup-page bg-bodyBg'>
     <div
@@ -14,7 +77,7 @@ function Signup() {
        </div>
        <div className="flex flex-col items-center">
          <h1 className="text-2xl xl:text-3xl font-extrabold text-accent">
-           Sign Up - Staff-Finder
+           Join Staff-finder
          </h1>
          <div className="w-full flex-1 mt-8">
            <div className="flex flex-col items-center">
@@ -45,8 +108,8 @@ function Signup() {
                </span>
              </button>
            </div>
-
-           <div className="my-12 border-b text-center">
+           <Loder visible={loderVisible} />
+           <div className="my-4 border-b text-center">
              <div
                className="leading-none px-2 inline-block text-sm text-accent tracking-wide font-medium bg-bodyBg transform translate-y-1/2"
              >
@@ -55,15 +118,40 @@ function Signup() {
            </div>
 
            <div className="mx-auto max-w-xs">
+            <form onSubmit={signup}>
+            <div className={`mb-5 py-2 w-full rounded-sm text-center text-sm bg-red-800 text-white font-semibold ${error.eerror}`}>{error.error}</div>
+
+              <div className='w-full inline-flex py-4 gap-1'>
+                <input
+                  className="w-full px-4 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100 "
+                  type="text"
+                  placeholder="First name"
+                  value={firstname}
+                  onChange={handleFirstnameChange}
+                  required
+                />
+                <input
+                  className="w-full  px-4 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100 "
+                  type="text"
+                  placeholder="Last name"
+                  value={lastName}
+                  onChange={handlelastNameChange}
+                  required
+                />
+              </div>
              <input
-               className="w-full px-8 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100 "
-               type="email"
-               placeholder="Email"
+                className="w-full px-8 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100 "
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
              />
              <input
-               className="w-full px-8 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100  mt-5"
-               type="password"
-               placeholder="Password"
+                className="w-full px-8 py-4 rounded-lg font-medium bg-bodyBg border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-gray-100  mt-5"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
              />
              <button
                className="mt-5 tracking-wide font-semibold bg-primary text-gray-100 w-full py-4 rounded-lg hover:bg-accent transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
@@ -84,6 +172,7 @@ function Signup() {
                  Sign up
                </span>
              </button>
+             </form>
              <p className="mt-6 text-xs text-gray-600 text-center">
                I agree to abide by staff-finder's
                <a href="#" className="border-b border-gray-500 border-dotted"> Terms of Service</a> and its
