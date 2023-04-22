@@ -1,13 +1,42 @@
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import '../App.css'
 import { Link } from "react-router-dom"
 import Job from "../components/job/Job"
 import MyPortfolio from "../components/myPortfolio"
 import config from "../../config"
 import UpdatePortfolioForm from "../components/forms/updatePortfolio"
+import { useNavigate } from 'react-router-dom';
 
 export default function Root() {
 
+  const token = localStorage.getItem(config.token_var) 
+  const navigate = useNavigate()
+  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT
+
+  const [user, setuser] = useState({})
+
+  useEffect( async () => {
+    if(!token){
+      return navigate('/login')
+    }
+    await getLoggedUser()
+  }, [token])
+  
+  async function getLoggedUser(){
+
+    let response = await fetch(`${base_url}/api/user/getLoggedUser`, { 
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    let data = await response.json()
+    console.log(data);
+    if(data.success){
+      setuser(data.data)
+    }
+  }
   // title for home header
   const titles = {
     myPortfolio : 'My Portfolio',
@@ -118,7 +147,7 @@ export default function Root() {
               <div className='root-Content-main p-4 py-3 lg:px-16'>
                 {/*  MAIN PAGES */}
                 {page=== 'jobsExporer' && <Job /> }
-                {page=== 'myPortfolio' && <MyPortfolio update={updatePage} /> }
+                {page=== 'myPortfolio' && <MyPortfolio user={user} update={updatePage} /> }
                 {page=== 'updateMyPortfolio' && <UpdatePortfolioForm /> }
               </div>
             </div>

@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect , useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loder from '../../components/Loder';
 import config from '../../../config';

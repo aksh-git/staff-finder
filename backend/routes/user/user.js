@@ -14,12 +14,28 @@ userRoute.post('/getUserByID', fetchuser, async (req, res)=>{
         var userId = req.body.id;
         const user = await User.findById(userId).select("-password");
         if(user){
-            res.status(200).send({success:true,data:user});
+            res.status(200).json({success:true,data:user});
         }else{
-            res.status(200).send({success:false,data:{}});
+            res.status(200).json({success:false,data:{}});
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send({success:false, error:"Internal Server Error"});
+        res.status(500).json({success:false, error:"Internal Server Error"});
     }
 })
+userRoute.post('/getLoggedUser', fetchuser, async (req, res)=>{
+    try {
+        var userId = req.user.id;
+        const user = await User.findById(userId).select("-password");
+        if(user){
+            res.status(200).json({success:true,data:user});
+        }else{
+            res.status(200).json({success:false,data:{}});
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({success:false, error:"Internal Server Error"});
+    }
+})
+
+export default userRoute;

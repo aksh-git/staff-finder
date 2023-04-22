@@ -80,6 +80,7 @@ function UpdatePortfolioForm(props) {
         });
     };
 
+    
 
   return (
     <div className='myprofile-area lg:px-16 w-full bg-bodyBg'>
@@ -88,74 +89,87 @@ function UpdatePortfolioForm(props) {
         <div className="lg:p-8 p-8 bg-white shadow mt-4">
             {/**Personal info section */}
             <section className='border-b-2 mb-3'>
-            <span className='py-2 font-medium text-gray-600 capitalize text-sm'>Personal information</span>
-            <div class="md:flex md:items-center md:justify-start mb-6">
-                <div class="md:w-1/5">
-                    <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-                        Name
+                <span className='py-2 font-medium text-gray-600 capitalize text-sm'>Personal information</span>
+                <div class="md:flex md:items-center md:justify-start mb-4">
+                    <div class="md:w-1/5">
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+                            Name
+                        </label>
+                    </div>
+                    
+                    <div class="md:w-2/3 sm:w-full inline-flex items-center gap-2">
+                        <input 
+                            placeholder='First' 
+                            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
+                            id="inline-full-name" 
+                            type="text" 
+                            />
+                        <input 
+                            placeholder='Last' 
+                            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
+                            id="inline-full-name" 
+                            type="text" 
+                            />
+                    </div>
+                </div>
+                <div class="md:flex md:items-start mb-4">
+                    <div class="md:w-1/5">
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" >
+                            Bio
+                        </label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <textarea 
+                        class="bg-gray-200 resize-none appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
+                        type="text" 
+                        minLength={10}
+                        maxLength={250}
+                        placeholder="Write few words about yourself..."/>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-4">
+                    <div class="md:w-1/5">
+                    <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" >
+                        Address
                     </label>
-                </div>
-                <div class="md:w-2/3 sm:w-full inline-flex items-center gap-2">
+                    </div>
+                    <div class="md:w-2/3">
                     <input 
-                        placeholder='First' 
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
-                        id="inline-full-name" 
-                        type="text" 
-                        />
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
+                    id="inline-password" 
+                    type="text" 
+                    placeholder="Mumbai, India"/>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-4">
+                    <div class="md:w-1/5">
+                    <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" >
+                        Date of birth
+                    </label>
+                    </div>
+                    <div class="md:w-2/3">
                     <input 
-                        placeholder='Last' 
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
-                        id="inline-full-name" 
-                        type="text" 
-                        />
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
+                    id="inline-password" 
+                    type="date" 
+                    placeholder="Mumbai, India"/>
+                    </div>
                 </div>
-            </div>
-            <div class="md:flex md:items-center mb-6">
-                <div class="md:w-1/5">
-                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
-                    Address
-                </label>
-                </div>
-                <div class="md:w-2/3">
-                <input 
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
-                id="inline-password" 
-                type="text" 
-                placeholder="Mumbai, India"/>
-                </div>
-            </div>
-            <div class="md:flex md:items-center mb-6">
-                <div class="md:w-1/5">
-                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
-                    Date of birth
-                </label>
-                </div>
-                <div class="md:w-2/3">
-                <input 
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bodyBg" 
-                id="inline-password" 
-                type="date" 
-                placeholder="Mumbai, India"/>
-                </div>
-            </div>
             </section>
              {/**Education info section */}
             <section className='border-b-2 mb-3'>
                 <span className='py-2 font-medium text-gray-600 capitalize text-sm'>Educational Information</span>
                 {eduInputArr.map((item, i)=>{
-                //    count=parseInt(i)+1;
                    return <EducationInput 
                     id={`eduInput_${i}`} 
                     data={item} 
                     handleChange={handleEduChange}
                     />
                 })}
-                <div class="md:flex md:items-center py-4 md:py-0 mb-6">
+                <div class="md:flex md:items-center py-4 md:py-0 mb-4">
                     <div class="w-full float-right lg:pr-32">
-                        <AddNewFieldBtn
-                            clickAction={addEduInput}
-                        >
-                            New Edu. field
+                        <AddNewFieldBtn clickAction={addEduInput}>
+                            Add a new edu. field
                         </AddNewFieldBtn>
                     </div>
                 </div>
@@ -165,7 +179,7 @@ function UpdatePortfolioForm(props) {
                 <span className='py-2 font-medium text-gray-600 capitalize text-sm'>Social Information</span>
                 
             </section> */}
-            <div class="md:flex md:items-center mb-6">
+            <div class="md:flex md:items-center mb-4">
                 <div class="md:w-1/5"></div>
                 <label class="md:w-2/3 block text-gray-500 font-bold">
                 <input class="mr-2 leading-tight" type="checkbox"/>

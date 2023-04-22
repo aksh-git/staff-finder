@@ -9,7 +9,7 @@ const fetchuser = (req, res, next) => {
     const token = req.header('auth-token');
     if (!token) {
         success = false;
-        res.status(401).send({success:success, error: "Please authenticate using a valid token." })
+        res.status(401).json({success:success, error: "Please authenticate using a valid token." })
     }
     try {
         const data = verify(token, JWT_SECRET);
@@ -17,7 +17,7 @@ const fetchuser = (req, res, next) => {
         next();
     } catch (error) {
         success = false;
-        res.status(401).send({success:success, error: "Please authenticate using a valid token." })
+        res.status(401).json({success:success, error: "Please authenticate using a valid token." })
     }
 
 }

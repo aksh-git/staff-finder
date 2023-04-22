@@ -14,8 +14,8 @@ function EducationInput(props) {
   const handleChange = props.handleChange;
 
   return (
-    <div className='border-r-2 mb-6'>
-        <div className="md:flex md:items-center mb-6">
+    <div className='border-r-2 mb-4'>
+        <div className="md:flex md:items-center mb-4">
             <div className="md:w-1/5">
                 <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor={`${groupId}_course`}>
                     Course
@@ -32,7 +32,7 @@ function EducationInput(props) {
                     />
             </div>
         </div>
-        <div className="md:flex md:items-center mb-6">
+        <div className="md:flex md:items-center mb-4">
             <div className="md:w-1/5">
                 <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor={`${groupId}_institution`}>
                     Instituation
@@ -49,7 +49,7 @@ function EducationInput(props) {
             </div>
         </div>
         <div>
-        <div className="md:flex md:items-center mb-6">
+        <div className="md:flex md:items-center mb-4">
             <div className="md:w-1/5">
                 <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor={`${groupId}_grade`}>
                     Grade & year

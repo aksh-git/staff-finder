@@ -26,17 +26,14 @@ authRoute.post('/login', [
         }
         const passComp = await bcrypt.compare(password, user.password);
         if(!passComp){
-            success=false;
-            return res.status(400).json({success:success,error: "Please Login with correct credentials"});
+            return res.status(400).json({success:true,error: "Please Login with correct credentials"});
         }
         const data = {
-            id : user.id,
-            username : user.username,
-            email: user.email,
-            firstname: user.firstname,
-            lastname: user.lastname,
+            user: {
+                id: user.id
+            }
         }
-        const authtoken = jwt.sign(data,JWT_SECRET);
+        const authtoken = jwt.sign(data, JWT_SECRET);
         res.json({success:true, authtoken:authtoken, data:data}); 
     } catch (error) {
         console.log(error);
