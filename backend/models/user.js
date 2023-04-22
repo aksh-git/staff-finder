@@ -5,7 +5,8 @@ const userSchema = new Schema({
         type : String,
     },
     type : {
-        type : String, // employee, employer 
+        type : Number, // employee : 1, employer : 2
+        defaut : 1
     },
     firstname: {
         type : String,
@@ -15,14 +16,30 @@ const userSchema = new Schema({
         type : String,
         required : true
     },
+    dob : {
+        type : Date
+    },
+    location : {
+        type : String
+    },
+    avatar : {
+        type : String
+    },
     email: {
         type : String,
         required : true,
         unique: true
     },
+    bio : {
+        type : String,
+        default : 'Hey there! Welcome to my protfolio.'
+    },
     password:{
         type: String,
         required : true,
+    },
+    projects : {
+        type : []
     },
     skills : {
         type : []
@@ -37,7 +54,16 @@ const userSchema = new Schema({
         type : []
     },
     cv_link : {
-        type : String
+        type : String,
+    },
+    // -----------------
+    boost : {
+        type : Number,
+        default : 0,
+    },
+    reputation : {
+        type : Number,
+        default : 5 // max : 10 min : 0
     }
 }, { timestamps:true })
 

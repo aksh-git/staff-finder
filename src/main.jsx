@@ -13,6 +13,7 @@ import ErrorPage from './pages/error-page'
 import Login from './pages/auth/Login'
 import Signup from './pages/auth/Signup'
 import Jobs from './pages/Jobs'
+import Portfolio from './pages/Portfolio'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/jobs",
     element: <Jobs />
+  },
+  {
+    path: "/portfolio",
+    element: <Portfolio />
   },
 ]);
 
