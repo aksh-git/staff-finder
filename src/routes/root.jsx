@@ -4,12 +4,14 @@ import { Link } from "react-router-dom"
 import Job from "../components/job/Job"
 import MyPortfolio from "../components/myPortfolio"
 import config from "../../config"
+import UpdatePortfolioForm from "../components/forms/updatePortfolio"
 
 export default function Root() {
 
   // title for home header
   const titles = {
     myPortfolio : 'My Portfolio',
+    updateMyPortfolio : 'Update Portfolio',
     jobsExporer : 'Explore jobs',
     aboutUs : 'About',
     help : 'Get help'
@@ -26,7 +28,7 @@ export default function Root() {
   function updatePage(page){
     setpageTitle(titles[page]?titles[page]:'')
     setpage(page);
-    toggleMenu();
+    setsidebarStatus(false)
   }
 
   function logout(){
@@ -116,7 +118,8 @@ export default function Root() {
               <div className='root-Content-main p-4 py-3 lg:px-16'>
                 {/*  MAIN PAGES */}
                 {page=== 'jobsExporer' && <Job /> }
-                {page=== 'myPortfolio' && <MyPortfolio /> }
+                {page=== 'myPortfolio' && <MyPortfolio update={updatePage} /> }
+                {page=== 'updateMyPortfolio' && <UpdatePortfolioForm /> }
               </div>
             </div>
           </div>
