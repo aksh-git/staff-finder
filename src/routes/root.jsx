@@ -71,6 +71,10 @@ export default function Root() {
     localStorage.removeItem(config.token_var)
   }
 
+  function updateUserData(user){
+    setuser(user)
+  }
+
   return (
     <div id="root-content" className="content">
       <div className='root-container'>
@@ -165,8 +169,8 @@ export default function Root() {
                 {/*  MAIN PAGES */}
                 {page === 'jobsExporer' && <JobsExplorer /> }
                 {page === 'myPortfolio' && <MyPortfolio user={user} update={updatePage} /> }
-                {page === 'updateMyPortfolio' && <UpdatePortfolioForm user={user} /> }
-                {page === 'createNewJob' && <CreateNewJob goback={returnToHome}/> }
+                {page === 'updateMyPortfolio' && <UpdatePortfolioForm setUserData={updateUserData} user={user} goback={returnToHome}/> }
+                {page === 'createNewJob' && <CreateNewJob goback={returnToHome} /> }
               </div>
             </div>
           </div>

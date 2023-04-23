@@ -165,7 +165,7 @@ function myPortfolio(props) {
               return(
                 <div className='border-l border-bodyBg pl-3 py-1 course md:w-2/5 sm:w-full'>
                   <div className='w-full flex justify-between items-center'>
-                    <span className='text-gray-800 font-semibold capitalize'>{course.title}</span>
+                    <span className='text-gray-800 font-semibold capitalize'>{course.course}</span>
                     <span className='text-gray-900'>—</span>
                     <span className='text-gray-500 font-semibold'>{course.year}</span>
                   </div>

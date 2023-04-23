@@ -38,4 +38,15 @@ userRoute.post('/getLoggedUser', fetchuser, async (req, res)=>{
     }
 })
 
+userRoute.post('/updateUser', fetchuser, async (req,res)=>{
+    try {
+        let userId = req.user.id
+        const updateData = req.body.updateData;
+        let user = await User.findByIdAndUpdate(userId, updateData)
+        res.status(200).json({success:true, data:user})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({success:false, error:[{msg:"Internal Server Error"}]});
+    }
+})
 export default userRoute;
