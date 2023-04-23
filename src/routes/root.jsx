@@ -57,6 +57,9 @@ export default function Root() {
     setsidebarStatus(!sidebarStatus)
   }   
 
+  function returnToHome(){
+    setpage('myPortfolio')
+  }
   function updatePage(page){
     setpageTitle(titles[page]?titles[page]:'')
     setpage(page);
@@ -105,6 +108,17 @@ export default function Root() {
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A.998.998 0 0 0 5 3v18a1 1 0 0 0 .536.886zM7 4.909 17.243 12 7 19.091V4.909z"></path></svg>
                   </div>
               </li>
+              <li onClick={()=>updatePage('createNewJob')} className='navItem hover:bg-accent'>
+                <div className='left'>
+                <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
+                  <div className='title'>
+                    Create New job
+                  </div>
+                </div>
+                <div className='r-icon'>
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A.998.998 0 0 0 5 3v18a1 1 0 0 0 .536.886zM7 4.909 17.243 12 7 19.091V4.909z"></path></svg>
+                </div>
+              </li>
               <li onClick={()=>updatePage('aboutUs')} className='navItem hover:bg-accent'>
                 <div className='left'>
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z"></path></svg>
@@ -152,7 +166,7 @@ export default function Root() {
                 {page === 'jobsExporer' && <JobsExplorer /> }
                 {page === 'myPortfolio' && <MyPortfolio user={user} update={updatePage} /> }
                 {page === 'updateMyPortfolio' && <UpdatePortfolioForm user={user} /> }
-                {page === 'createNewJob' && <CreateNewJob /> }
+                {page === 'createNewJob' && <CreateNewJob goback={returnToHome}/> }
               </div>
             </div>
           </div>

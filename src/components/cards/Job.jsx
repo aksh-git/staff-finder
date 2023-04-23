@@ -3,20 +3,19 @@ import React from 'react'
 function Job(props) {
 
   const { job } = props
-  
 
   return (
     <div class="w-full my-3">
       <div class="bg-white p-4 py-4">
         <div class="header px-4 flex flex-col justify-start items-start border-b pb-3 lg:mx-4 sm:mx-2">
           <div class="text-gray-700 font-bold text-xl md:text-2xl mb-3 capitalize">{job.title}</div>
-          <div class="flex items-center -mt-1">
+          {/* <div class="flex items-center -mt-1">
             <img class="w-10 h-10 mr-3 bg-bodyBg" src="/img/jonathan.jpg" alt=""/>
             <div class="text-sm ">
               <p class="text-gray-800 leading-none">Jonathan Reinink</p>
               <p class="text-gray-600">sdasd</p>
             </div>
-          </div>
+          </div> */}
           <div className='inline-flex justify-between items-center gap-1 mt-1'>
             <svg className='font-light text-gray-400' stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             <p className="text-gray-400 font-semibold">{job.location}</p>
@@ -54,13 +53,13 @@ function Job(props) {
           <div>
             <p className='text-gray-600 py-2 hyphens-auto'>{job.description}</p>
           </div>
-          <div className='mt-2'>
+          {job.note && <div className='mt-2'>
             <p className='text-gray-600 text-base font-bold'>Please Note :</p>
             <p className='text-gray-500 hyphens-auto pb-2'>{job.note}</p>
-          </div>
-          <div className='my-2'>
+          </div>}
+          {job.extra_note && <div className='my-2'>
             <p className='text-gray-500 py-1 hyphens-auto italic border-l-2 pl-3 border-bodyBg'>"{job.extra_note}"</p>
-          </div>
+          </div>}
         </div>
       </div>
     </div>
