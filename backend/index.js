@@ -5,7 +5,7 @@ import userRoute from './routes/user/user.js'
 import connectToDatabase from './db.js'
 import cors from 'cors'
 
-const PORT = 7823;
+const PORT = 8080;
 
 const app = express()
 

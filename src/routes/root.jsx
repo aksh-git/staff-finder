@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react"
 import '../App.css'
-import { Link } from "react-router-dom"
-import Job from "../components/job/Job"
 import MyPortfolio from "../components/myPortfolio"
 import config from "../../config"
 import UpdatePortfolioForm from "../components/forms/updatePortfolio"
 import { useNavigate } from 'react-router-dom';
+import JobsExplorer from "../pages/JobsExplorer"
+import CreateNewJob from "../components/forms/createNewJob"
 
 export default function Root() {
 
   const token = localStorage.getItem(config.token_var) 
   const navigate = useNavigate()
-  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT
+  const base_url = config.BACKEND_HOST+config.BACKEND_PORT;
 
   const [user, setuser] = useState({})
 
@@ -42,8 +42,9 @@ export default function Root() {
   // title for home header
   const titles = {
     myPortfolio : 'My Portfolio',
+    createNewJob : 'Add New Job',
     updateMyPortfolio : 'Update Portfolio',
-    jobsExporer : 'Explore jobs',
+    jobsExporer : 'Explore Jobs',
     aboutUs : 'About',
     help : 'Get help'
   }
@@ -95,10 +96,10 @@ export default function Root() {
               </li>
               <li onClick={()=>updatePage('jobsExporer')} className='navItem hover:bg-accent'>
                   <div className='left'>
-                      <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M858.5 763.6a374 374 0 0 0-80.6-119.5 375.63 375.63 0 0 0-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 0 0-80.6 119.5A371.7 371.7 0 0 0 136 901.8a8 8 0 0 0 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 0 0 8-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path></svg>
-                      <div className='title'>
-                          Explore jobs
-                      </div>
+                  <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <div className='title'>
+                      Explore jobs
+                    </div>
                   </div>
                   <div className='r-icon'>
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A.998.998 0 0 0 5 3v18a1 1 0 0 0 .536.886zM7 4.909 17.243 12 7 19.091V4.909z"></path></svg>
@@ -148,9 +149,10 @@ export default function Root() {
             <div className='root-main-container'>
               <div className='root-Content-main p-4 py-3 lg:px-16'>
                 {/*  MAIN PAGES */}
-                {page=== 'jobsExporer' && <Job /> }
-                {page=== 'myPortfolio' && <MyPortfolio user={user} update={updatePage} /> }
-                {page=== 'updateMyPortfolio' && <UpdatePortfolioForm user={user} /> }
+                {page === 'jobsExporer' && <JobsExplorer /> }
+                {page === 'myPortfolio' && <MyPortfolio user={user} update={updatePage} /> }
+                {page === 'updateMyPortfolio' && <UpdatePortfolioForm user={user} /> }
+                {page === 'createNewJob' && <CreateNewJob /> }
               </div>
             </div>
           </div>

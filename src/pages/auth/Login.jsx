@@ -5,7 +5,7 @@ import config from '../../../config';
 
 function Login() {
   const navigate = useNavigate();
-  const base_url = 'http://127.0.0.1:'+config.BACKEND_PORT;
+  const base_url = config.BACKEND_HOST+config.BACKEND_PORT;
   const token = localStorage.getItem(config.token_var) 
   
   useEffect(() => {

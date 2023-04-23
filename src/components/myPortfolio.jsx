@@ -5,6 +5,7 @@ function myPortfolio(props) {
 
   const updatePage = props.update;
   const user = props.user;
+  
   const dummyuser = {
     username:'username',
     type : 1,  // employee : 1, employer : 2

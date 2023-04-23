@@ -26,7 +26,7 @@ authRoute.post('/login', [
         }
         const passComp = await bcrypt.compare(password, user.password);
         if(!passComp){
-            return res.status(400).json({success:true,error: "Please Login with correct credentials"});
+            return res.status(400).json({success:false, error: "Please Login with correct credentials"});
         }
         const data = {
             user: {
